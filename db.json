@@ -7,7 +7,8 @@
       "type": "klassrum",
       "imageUrl": "https://images.unsplash.com/photo-1518770660439-4636190af475",
       "startDate": "2026-04-15",
-      "price": 12900
+      "price": 12900,
+      "id": "0a4b"
     },
     {
       "title": "Backendutveckling med Node.js",
@@ -16,7 +17,8 @@
       "type": "distans",
       "imageUrl": "https://images.unsplash.com/photo-1555066931-4365d14bab8c",
       "startDate": "2026-05-06",
-      "price": 10900
+      "price": 10900,
+      "id": "64a5"
     },
     {
       "title": "Databaser och SQL för Systemutvecklare",
@@ -25,7 +27,10 @@
       "type": "on-demand",
       "imageUrl": "https://images.unsplash.com/photo-1544383835-bda2bc66a55d",
       "startDate": "2026-03-20",
-      "price": 7900
+      "price": 7900,
+      "id": "2961"
     }
-  ]
+  ],
+  "bookings": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
