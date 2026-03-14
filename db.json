@@ -29,6 +29,16 @@
       "startDate": "2026-03-20",
       "price": 7900,
       "id": "2961"
+    },
+    {
+      "id": "6b2d",
+      "title": "Kurs",
+      "courseNumber": "111",
+      "durationDays": 11,
+      "type": "Supabase",
+      "imageUrl": "Bild",
+      "startDate": "2026-03-15",
+      "price": 1000000
     }
   ],
   "bookings": [],
