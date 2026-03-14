@@ -1,3 +1,5 @@
+import { CourseValidator } from "../dist/CourseValidator.js";
+
 // API-adresser till json-server.
 const BOOKINGS_URL = "http://localhost:3000/bookings";
 const COURSES_URL = "http://localhost:3000/courses";
@@ -5,6 +7,7 @@ const COURSES_URL = "http://localhost:3000/courses";
 // Hämtar referenser till elementen på adminsidan.
 const bookingListElement = document.getElementById("booking-list");
 const courseFormElement = document.getElementById("course-form");
+const courseValidator = new CourseValidator();
 
 // Hämtar alla bokningar och visar dem i listan.
 async function loadBookings() {
@@ -51,7 +54,7 @@ courseFormElement.addEventListener("submit", async (event) => {
 	const price = Number(document.getElementById("price").value);
 
 	// Skapar ett nytt kursobjekt från formulärets värden.
-	const course = {
+	const newCourse = {
 		title,
 		courseNumber,
 		durationDays,
@@ -61,13 +64,19 @@ courseFormElement.addEventListener("submit", async (event) => {
 		price
 	};
 
+	// Validerar kursen innan vi skickar den till servern.
+	if (!courseValidator.isValid(newCourse)) {
+		alert("Ogiltig kursdata! Kontrollera att titel finns och priset inte ar negativt.");
+		return;
+	}
+
 	try {
 		const response = await fetch(COURSES_URL, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify(course)
+			body: JSON.stringify(newCourse)
 		});
 
 		if (!response.ok) {

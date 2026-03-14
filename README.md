@@ -1,50 +1,72 @@
 # Westcoast Education
 
-Detta projekt är en webbapplikation byggd med Vanilla JavaScript (ES6-moduler) och Bootstrap 5.
-Applikationen hämtar kursdata från en lokal `json-server` och visar kurser i kortformat.
+Detta projekt är en webbapplikation byggd med Vanilla JavaScript (ES6-moduler), Bootstrap 5, json-server och TypeScript för validering.
 
 ## Funktioner
 
 - Visar kurser från `db.json` via `fetch`
-- Renderar varje kurs som ett Bootstrap-kort
-- Har en bokningsknapp per kurs
-- Öppnar en Bootstrap-modal med bokningsformulär
+- Renderar kurser som Bootstrap-kort på `index.html`
+- Har bokningsfunktion via modal och sparar bokningar i json-server
+- Har admin-sida (`admin.html`) för att:
+  - lägga till nya kurser
+  - visa inkomna bokningar
+- Validerar kursdata med `CourseValidator` innan kurs sparas
 
 ## Tekniker
 
 - HTML5
-- CSS (Bootstrap 5 via CDN)
+- Bootstrap 5 (CDN)
 - Vanilla JavaScript (ES6-moduler)
+- TypeScript
+- Jest + ts-jest (TDD)
 - json-server
 
-## Kom igang
+## Scripts
+
+- `npm run start` – startar json-server på port 3000
+- `npm run build` – kompilerar TypeScript till `dist/`
+- `npm run test` – kör Jest-tester
+
+## Kom igång
 
 1. Installera beroenden:
 
    `npm install`
 
-2. Starta API (json-server):
+2. Kompilera TypeScript (krävs för admin-sidan):
+
+   `npm run build`
+
+3. Starta API (json-server):
 
    `npm run start`
 
-3. Oppna `index.html` i webblasaren.
+4. Öppna sidor i webbläsaren:
 
-## API-endpoint
+   - `index.html`
+   - `admin.html`
 
-Nar `json-server` ar igang finns endpointen har:
+## API-endpoints
+
+När json-server är igång används:
 
 - `http://localhost:3000/courses`
+- `http://localhost:3000/bookings`
 
 ## Projektstruktur
 
-- `index.html` – huvudsidans struktur
-- `src/app.js` – logik for att hamta och visa kurser samt oppna modal
-- `db.json` – testdata for kurser
-- `package.json` – projektkonfiguration och scripts
+- `index.html` – kundsida med kurslista och bokningsmodal
+- `admin.html` – administrationssida med kursformulär och bokningslista
+- `src/app.js` – logik för kursvisning och bokning
+- `src/admin.js` – logik för adminfunktioner
+- `src/CourseValidator.ts` – TypeScript-klass för kursvalidering
+- `tests/CourseValidator.test.ts` – TDD-tester för validering
+- `dist/CourseValidator.js` – kompilerad validator för webbläsaren
+- `db.json` – lokal databas med `courses` och `bookings`
 
-## Exempeldata i db.json
+## Kursmodell
 
-Varje kurs innehaller foljande falt:
+Varje kurs innehåller följande fält:
 
 - `title`
 - `courseNumber`
