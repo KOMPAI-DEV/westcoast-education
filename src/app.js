@@ -14,6 +14,14 @@ const bookingModal = new bootstrap.Modal(bookingModalElement);
 // Sparar vald kurs tillfälligt när användaren klickar på "Boka".
 let selectedCourseNumber = "";
 
+function getReadableFetchError(error) {
+	if (error instanceof TypeError) {
+		return "Kunde inte ansluta till API:t. Kontrollera att json-server körs (npm run start).";
+	}
+
+	return error.message;
+}
+
 // Returnerar HTML för ett Bootstrap-kort baserat på en kurs.
 function createCourseCard(course) {
 	return `
@@ -91,7 +99,7 @@ bookingFormElement.addEventListener("submit", async (event) => {
 		selectedCourseElement.textContent = "";
 		alert("Tack for din bokning!");
 	} catch (error) {
-		alert(`Ett fel uppstod: ${error.message}`);
+		alert(`Ett fel uppstod: ${getReadableFetchError(error)}`);
 	}
 });
 
@@ -119,7 +127,7 @@ async function loadCourses() {
 		courseListElement.innerHTML = `
 			<div class="col-12">
 				<div class="alert alert-danger" role="alert">
-					Ett fel uppstod: ${error.message}
+					Ett fel uppstod: ${getReadableFetchError(error)}
 				</div>
 			</div>
 		`;

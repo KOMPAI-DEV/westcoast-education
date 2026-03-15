@@ -9,6 +9,14 @@ const bookingListElement = document.getElementById("booking-list");
 const courseFormElement = document.getElementById("course-form");
 const courseValidator = new CourseValidator();
 
+function getReadableFetchError(error) {
+	if (error instanceof TypeError) {
+		return "Kunde inte ansluta till API:t. Kontrollera att json-server körs (npm run start).";
+	}
+
+	return error.message;
+}
+
 // Hämtar alla bokningar och visar dem i listan.
 async function loadBookings() {
 	try {
@@ -35,7 +43,7 @@ async function loadBookings() {
 	} catch (error) {
 		bookingListElement.innerHTML = `
 			<li class="list-group-item text-danger">
-				Ett fel uppstod: ${error.message}
+				Ett fel uppstod: ${getReadableFetchError(error)}
 			</li>
 		`;
 	}
@@ -86,7 +94,7 @@ courseFormElement.addEventListener("submit", async (event) => {
 		alert("Kursen har sparats!");
 		courseFormElement.reset();
 	} catch (error) {
-		alert(`Ett fel uppstod: ${error.message}`);
+		alert(`Ett fel uppstod: ${getReadableFetchError(error)}`);
 	}
 });
 
